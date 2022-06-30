@@ -4,6 +4,7 @@ import Image from "next/image"
 import ProductCard from "../components/ProductCard"
 import React, { useEffect, useState } from "react"
 import { createClient } from "contentful"
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 export default function Home(props) {
 	const { blogs } = props
@@ -19,15 +20,19 @@ export default function Home(props) {
 			</Head>
 
 			<div className="w-full bg-gray-900 p-6">
-				<h2 className="text-2xl text-gray-300 font-bold">NextCart</h2>
+				<h2 className="text-2xl text-gray-300 font-bold">NextBlog</h2>
 			</div>
 
-			<div className="w-full min-h-screen bg-gray-900">
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-8 pb-8">
-					{blogs.map((product, index) => (
-						<ProductCard key={index} product={product} />
-					))}
-				</div>
+			<div className="w-full min-h-screen bg-gray-900 px-8 pb-8">
+				<ResponsiveMasonry
+					columnsCountBreakPoints={{ 350: 1, 640: 2, 768: 3, 1024: 4 }}
+				>
+					<Masonry gutter={16}>
+						{blogs.map((product, index) => (
+							<ProductCard key={index} product={product} />
+						))}
+					</Masonry>
+				</ResponsiveMasonry>
 			</div>
 		</div>
 	)
