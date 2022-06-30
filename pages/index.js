@@ -46,8 +46,9 @@ export async function getStaticProps() {
 
 	const res = await client.getEntries({ content_type: "nextBlog" })
 
+	console.log("regenerating static props")
+
 	return {
 		props: { blogs: res.items },
-		revalidate: 60000,
 	}
 }
